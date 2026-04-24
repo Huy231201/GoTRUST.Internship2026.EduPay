@@ -1,0 +1,25 @@
+# Build folders
+bin/
+obj/
+
+# Git
+.git/
+.gitignore
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Node (nếu có frontend)
+node_modules/
+
+# Docker
+Dockerfile*
+docker-compose*

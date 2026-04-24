@@ -1,0 +1,25 @@
+global using EduPayAPI.Domain.Entities;
+global using MediatR;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Reflection;
+global using Microsoft.Extensions.Logging;
+global using FluentValidation;
+global using EduPayAPI.Application.Common.Behaviors;
+global using EduPayAPI.Application.Common.Exceptions;
+global using EduPayAPI.Application.Common.Interfaces;
+global using EduPayAPI.Domain.Constants;
+global using EduPayAPI.Application.Common.Models;
+global using EduPayAPI.Application.Features.Classes.ImportClass;
+global using Microsoft.AspNetCore.Http;
+global using EduPayAPI.Application.Features.Report;
+global using EduPayAPI.Domain.Enums;
+global using System.Security.Cryptography;
+global using EduPayAPI.Application.Features.Auth.Login;
+global using System.Text.Json.Serialization;
+global using System.Text.RegularExpressions;
+global using EduPayAPI.Features.Classes.ImportClass;
+global using EduPayAPI.Application.Features.Students;
+global using EduPayAPI.Application.Features.Students.ImportStudent;
+global using System.Globalization;
+global using EduPayAPI.Features.Students.ImportStudent;
+

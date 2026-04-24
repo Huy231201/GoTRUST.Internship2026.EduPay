@@ -1,0 +1,79 @@
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: customer_postgres
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  mongodb:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    container_name: customer_api
+    depends_on:
+      - postgres
+      - redis
+      - mongodb
+    ports:
+      - "5000:8080"
+
+    # ✅ FIX CHÍNH Ở ĐÂY
+    volumes:
+      - .:/app  # Đồng bộ code để hot-reload
+      - /app/API/bin # 💡 Anonymous Volume: Giữ bin của container riêng biệt
+      - /app/API/obj # 💡 Anonymous Volume: Giữ obj của container riêng biệt
+      - /app/Application/bin
+      - /app/Application/obj
+      - /app/Domain/bin
+      - /app/Domain/obj
+      - /app/Infrastructure/bin
+      - /app/Infrastructure/obj
+
+    command: dotnet watch run --project API/API.csproj --urls=http://0.0.0.0:8080
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=app_db;Username=postgres;Password=postgres
+      ConnectionStrings__Redis: redis:6379
+      MongoDb__ConnectionString: mongodb://mongo:27017/LogsDb
+
+  pgadmin:
+    image: dpage/pgadmin4:7
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
