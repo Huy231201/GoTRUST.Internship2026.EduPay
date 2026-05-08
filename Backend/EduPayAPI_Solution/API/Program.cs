@@ -2,6 +2,8 @@
 
 using DevExpress.AspNetCore;
 using DevExpress.AspNetCore.Reporting;
+using EduPayAPI.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,5 +80,14 @@ app.UseRateLimiter();
 // Map toàn bộ endpoint từ Carter
 app.MapCarter();
 app.MapControllers();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    db.Database.Migrate();
+}
+
 
 app.Run();
