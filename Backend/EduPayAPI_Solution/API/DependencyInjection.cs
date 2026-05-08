@@ -33,7 +33,9 @@ public static class DependencyInjection
                     "http://localhost:3000", // Cổng mặc định của React
                     "http://localhost:5173",  // Cổng mặc định của Vite
                     "http://localhost:5000", 
-                    "http://localhost:8080"
+                    "http://localhost:8080",
+                      // Vercel frontend
+                    "https://gotrust-edupay.vercel.app"
                 )
                 .AllowAnyHeader()  // Cho phép mọi loại Header (Authorization, Content-Type, v.v.)
                 .AllowAnyMethod()  // Cho phép mọi phương thức (GET, POST, PUT, DELETE,...)
