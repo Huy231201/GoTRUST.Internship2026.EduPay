@@ -2,7 +2,7 @@
 services:
   postgres:
     image: postgres:16
-    container_name: customer_postgres
+    container_name: edupay_postgres
     environment:
       POSTGRES_DB: app_db
       POSTGRES_USER: postgres
@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: API/Dockerfile
-    container_name: customer_api
+    container_name: edupay_api
     depends_on:
       - postgres
       - redis
@@ -38,22 +38,8 @@ services:
     ports:
       - "5000:8080"
 
-    # ✅ FIX CHÍNH Ở ĐÂY
-    volumes:
-      - .:/app  # Đồng bộ code để hot-reload
-      - /app/API/bin # 💡 Anonymous Volume: Giữ bin của container riêng biệt
-      - /app/API/obj # 💡 Anonymous Volume: Giữ obj của container riêng biệt
-      - /app/Application/bin
-      - /app/Application/obj
-      - /app/Domain/bin
-      - /app/Domain/obj
-      - /app/Infrastructure/bin
-      - /app/Infrastructure/obj
-
-    command: dotnet watch run --project API/API.csproj --urls=http://0.0.0.0:8080
-
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://0.0.0.0:8080
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
 

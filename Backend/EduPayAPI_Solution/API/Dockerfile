@@ -83,7 +83,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6 \
     libharfbuzz0b \
     libpng16-16 \
-    libjpeg62-turbo \
+    libjpeg-dev \
     libxrender1 \
     libxext6 \
     libglib2.0-0 \
