@@ -287,7 +287,8 @@ export default function StudentReport() {
                     width="100%"
                 >
                     <RequestOptions
-                        host="http://localhost:5000"
+                        // host="http://localhost:5000"
+                        host={import.meta.env.VITE_API_URL}
                         invokeAction="/DXXRDV"
                     />
                 </DxReportViewer>

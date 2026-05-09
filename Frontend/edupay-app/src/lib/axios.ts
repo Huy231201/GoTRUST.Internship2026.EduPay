@@ -78,7 +78,8 @@ import axios from "axios";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 export const api = axios.create({
-  baseURL: "http://localhost:5000/edupay/v1",
+  // baseURL: "http://localhost:5000/edupay/v1",
+  baseURL: `${import.meta.env.VITE_API_URL}/edupay/v1`,
   headers: {
     "Content-Type": "application/json",
   },
