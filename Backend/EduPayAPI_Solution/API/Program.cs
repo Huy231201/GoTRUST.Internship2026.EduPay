@@ -15,10 +15,10 @@ Log.Logger = new LoggerConfiguration()
     rollingInterval: RollingInterval.Day,
     retainedFileCountLimit: 1
 )
-.WriteTo.MongoDB(
-    databaseUrl: builder.Configuration["MongoDb:ConnectionString"]!,
-    collectionName: "Logs"
-)
+// .WriteTo.MongoDB(
+//     databaseUrl: builder.Configuration["MongoDb:ConnectionString"]!,
+//     collectionName: "Logs"
+// )
 .CreateLogger();
 
 builder.Host.UseSerilog();
