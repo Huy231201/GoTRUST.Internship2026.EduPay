@@ -93,6 +93,7 @@ RUN apt-get update && apt-get install -y \
 COPY --from=build /app/out .
 
 # ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+
 EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "API.dll"]
